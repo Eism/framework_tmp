@@ -45,6 +45,8 @@ FocusScope {
     readonly property alias mouseArea: clickableArea
     property bool containsMouse: clickableArea.containsMouse
 
+    property alias scrollableContentHeight: content.contentHeight
+
     readonly property alias navigation: navCtrl
     readonly property alias accessible: navCtrl.accessible
 
@@ -120,6 +122,8 @@ FocusScope {
     }
 
     ScrollView {
+        id: content
+
         anchors.fill: parent
 
         ScrollBar.vertical: StyledScrollBar {
@@ -145,9 +149,14 @@ FocusScope {
             TextArea {
                 id: valueInput
 
+                width: root.width
+
                 objectName: "TextArea"
 
-                padding: root.textSidePadding
+                leftPadding: root.textSidePadding
+                rightPadding: root.textSidePadding
+                topPadding: root.textSidePadding
+                bottomPadding: root.textSidePadding
 
                 color: ui.theme.fontPrimaryColor
                 font: ui.theme.bodyFont
@@ -163,6 +172,7 @@ FocusScope {
                 visible: true
 
                 text: root.currentText === undefined ? "" : root.currentText
+                wrapMode: TextInput.Wrap
 
                 TextInputModel {
                     id: textInputModel
